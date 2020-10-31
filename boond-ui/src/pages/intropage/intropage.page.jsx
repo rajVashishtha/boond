@@ -9,7 +9,7 @@ class IntroPage extends React.Component{
         const {history} = this.props;
         return(
             <div>
-                <Glow text={"BOOND"} fontSize={200} />
+                <Glow text={"BOOND"} fontsize={200} />
                 <div style={{
                     display:"flex",
                     flexDirection:"row",

@@ -2,10 +2,10 @@ import React from 'react';
 import './glow.style.css';
 class Glow extends React.Component{
     render() {
-        const {fontSize, text} = this.props;
+        const {fontsize, text, link} = this.props;
         return(
-            <p><a href={`/`} style={{
-                fontSize :`${fontSize}px`
+            <p><a href={link} style={{
+                fontSize :`${fontsize}px`
             }}>{text}</a></p>
         )
     }
