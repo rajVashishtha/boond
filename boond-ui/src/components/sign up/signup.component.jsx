@@ -105,14 +105,14 @@ class SignUp extends React.Component{
         console.log("working fine")
     };
     render() {
-        const {classes, root} = this.props;
+        const {classes, root, display} = this.props;
         return (
             <div style={root}>
                 <form noValidate={false} onSubmit={this.handleRegister}>
                     <InputTextField required type={"email"} label={"Email"} variant={"outlined"}  width={350}
                                     value={this.state.email} name={"email"} onChange={this.handleChange}
                                     icon={<MailOutlinedIcon fontSize={"large"} className={classes.forIcon} />}/>
-                    <InputTextField required type={"text"} label={"Blood Bank"} variant={"outlined"} width={350}
+                    <InputTextField required type={"text"} label={display==="user"?"Name":"Blood Bank"} variant={"outlined"} width={350}
                                     value={this.state.name} name={"name"} onChange={this.handleChange}
                     icon={<HomeOutlinedIcon fontSize={"large"} className={classes.forIcon} />}/>
                     <InputTextField required type={"password"}
@@ -158,11 +158,6 @@ class SignUp extends React.Component{
                                         {
                                          this.state.cities.map(item=>(<option value={`${item}`}>{item}</option>))
                                         }
-                                        {/*<option value="Option 1">Option 1</option>*/}
-                                        {/*<option value="Option 2">Option 2</option>*/}
-                                        {/*<option value="Option 3">Option 3</option>*/}
-                                        {/*<option value="Option 4">Option 4</option>*/}
-                                        {/*<option value="Option 5">Option 5</option>*/}
                                     </select>
                                 </Grid>
                             </Grid>

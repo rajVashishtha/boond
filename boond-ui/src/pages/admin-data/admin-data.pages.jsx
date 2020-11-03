@@ -2,18 +2,19 @@ import React from 'react';
 import './admin-data.style.scss';
 import Header from "../../components/header/header.component";
 import PieChart from "../../components/piechart/piechart.component";
-import {Typography,Table ,TableHead, TableRow, TableCell, TableBody, IconButton, Tooltip, Grid} from '@material-ui/core';
+import {Typography,Table ,TableHead, TableRow, TableCell, TableBody, IconButton, Tooltip, Grid, Collapse} from '@material-ui/core';
 import {EditOutlined} from '@material-ui/icons';
 import CancelOutlinedIcon from '@material-ui/icons/CancelOutlined';
 import MailOutlinedIcon from "@material-ui/icons/MailOutlined";
 import InputTextField from "../../components/textfield/input-textfield.component";
 import CustomButton from "../../components/custom button/button.component";
+import EditingCard from '../../components/editing card/editing-card.component';
 
 class AdminData extends React.Component{
     state={
         active:null,
         labels:["A+","A-","B+","B-","AB+","AB-","O+","O-"],
-        bags:["100 ml", "150 ml", "400 ml","500 ml","600 ml"],
+        bags:["100 ml", "250 ml", "400 ml","500 ml","600 ml"],
         editActive:false,
         slidingClass:"",
         slidedChart:""
@@ -102,7 +103,7 @@ class AdminData extends React.Component{
                 {/*Down Section Content*/}
                 {
                     this.state.editActive?(
-                        <div>
+                        <React.Fragment>
                             <Typography variant={"h5"} align={"left"} style={{
                                     color:"#467DE3",
                                     fontWeight:"bold",
@@ -112,41 +113,64 @@ class AdminData extends React.Component{
                                     marginTop:"40px",
                                     marginLeft:"30px"
                             }}>Edit Data for {this.state.labels[this.state.active]}</Typography>
-                            <Table style={{border:"2px solid #467DE3", width:"800px", marginLeft:"50px",}}>
-                            <TableHead style={{fontWeight:"bold !important"}}>
-                                <TableRow >
-                                    <TableCell align={"center"}>Bag Type (ml)</TableCell>
-                                    <TableCell align={"center"}>Previous</TableCell>
-                                    <TableCell align={"center"}>New Data</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            <TableBody>
+                            <Grid container={true} spacing={6} justify={"flex-start"} alignItems={"center"} direction={"row"}
+                            style={{width:"95vw", marginLeft:"auto", marginRight:"auto"}}
+                            >
                                 {
-                                    this.state.bags.map((item, index)=>(
-                                        <TableRow>
-                                            <TableCell align={"center"}>{item}</TableCell>
-                                            <TableCell align={"center"}>{item}</TableCell>
-                                            <TableCell align={"center"}>
-                                                <InputTextField type={"number"} label={`${item} x n`} min={0} variant={"outlined"}/>
-                                            </TableCell>
-                                        </TableRow>
+                                    this.state.bags.map(size=>(
+                                        <Grid item={true} xs={"auto"}>
+                                            <EditingCard blood_type={this.state.labels[this.state.active]}
+                                                     bag_size={size} current_quantity={size} />
+                                        </Grid>
                                     ))
                                 }
-                            </TableBody>
-                        </Table>
-                            <Grid container={true} spacing={5} style={{marginTop:"40px"}} justify={"center"} >
-                                <Grid item={true}>
-                                    <CustomButton label={"Done"} fontsize={30} />
-                                </Grid>
-                                <Grid item={true}>
-                                    <CustomButton label={"Clear"} fontsize={30} />
-                                </Grid>
                             </Grid>
-                        </div>
-                    ):(null)
+                        </React.Fragment>
+                    ):null
                 }
             </div>
         );
     }
 }
+// <div>
+//     <Typography variant={"h5"} align={"left"} style={{
+//             color:"#467DE3",
+//             fontWeight:"bold",
+//             fontSize:"50px",
+//             fontFamily:"Iceland",
+//             marginBottom:"10px",
+//             marginTop:"40px",
+//             marginLeft:"30px"
+//     }}>Edit Data for {this.state.labels[this.state.active]}</Typography>
+//     <Table style={{border:"2px solid #467DE3", width:"800px", marginLeft:"50px",}}>
+//     <TableHead style={{fontWeight:"bold !important"}}>
+//         <TableRow >
+//             <TableCell align={"center"}>Bag Type (ml)</TableCell>
+//             <TableCell align={"center"}>Previous</TableCell>
+//             <TableCell align={"center"}>New Data</TableCell>
+//         </TableRow>
+//     </TableHead>
+//     <TableBody>
+//         {
+//             this.state.bags.map((item, index)=>(
+//                 <TableRow>
+//                     <TableCell align={"center"}>{item}</TableCell>
+//                     <TableCell align={"center"}>{item}</TableCell>
+//                     <TableCell align={"center"}>
+//                         <InputTextField type={"number"} label={`${item} x n`} min={0} variant={"outlined"}/>
+//                     </TableCell>
+//                 </TableRow>
+//             ))
+//         }
+//     </TableBody>
+// </Table>
+//     <Grid container={true} spacing={5} style={{marginTop:"40px"}} justify={"center"} >
+//         <Grid item={true}>
+//             <CustomButton label={"Done"} fontsize={30} />
+//         </Grid>
+//         <Grid item={true}>
+//             <CustomButton label={"Clear"} fontsize={30} />
+//         </Grid>
+//     </Grid>
+// </div>
 export default  AdminData;

@@ -4,7 +4,6 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 // import Switch from '@material-ui/core/Switch';
 // import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -12,6 +11,7 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import Glow from "../glow component/glow.component";
+import {withRouter} from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Header() {
+ function Header({history}) {
   const classes = useStyles();
   const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -87,7 +87,10 @@ export default function Header() {
                 onClose={handleClose}
               >
 
-                  <MenuItem onClick={handleClose}>Find Blood</MenuItem>
+                  <MenuItem onClick={()=>{
+                      handleClose();
+                      history.push("/search");
+                  }}>Find Blood</MenuItem>
                   <MenuItem onClick={handleClose}>Logout</MenuItem>
               </Menu>
             </div>
@@ -96,3 +99,5 @@ export default function Header() {
     </div>
   );
 }
+
+export default withRouter(Header);
